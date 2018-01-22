@@ -41,7 +41,6 @@ public class SlopeDetection : MonoBehaviour {
 		}
 
 		differentResult = result - result2;
-		Debug.Log(differentResult);
 		
 		Vector3 beginRotation = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
 
@@ -49,26 +48,23 @@ public class SlopeDetection : MonoBehaviour {
 		if (differentResult < -0.4f)
 		{
 			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z)), Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 8)) , 0.2f);
-			Debug.Log("true");
 		}
 		
 		if (differentResult < -0.8f)
 		{
 			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z)), Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 12)) , 0.2f);
-			Debug.Log("true");
 		}
 		
 		if (differentResult < -1f)
 		{
 			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z)), Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 17)) , 0.2f);
-			Debug.Log("true");
 		}
 		
 		
 		if (differentResult >= -0.4f)
 		{
 			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z)), Quaternion.Euler(new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 0)) , 0.2f);
-			Debug.Log("true");
+
 		}
 		
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public class StrafeBoat : MonoBehaviour {
 
 	public GameObject boatController;
+	public float TimerCooldownBegin;
+	public float TimerCooldownEnd;
 
 	private Vector3 startPos;
 	private Vector3 endPos;
@@ -24,12 +26,35 @@ public class StrafeBoat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetButton ("Strafe1"))
+	
+		print (strafing);
+		
+		if (Input.GetButton ("Strafe1") && strafing == false)
 		{
-			transform.right += Vector3.right * 5;
+			StartCoroutine(CooldownBegin());
+			transform.position += transform.right * 0.4f;
 		}
 		
 		
+		if (Input.GetButton ("Strafe2") && strafing == false)
+		{
+			StartCoroutine(CooldownBegin());
+			transform.position -= transform.right * 0.4f;
+		}
 		
+		
+	}
+	
+	IEnumerator	CooldownBegin()
+	{
+		yield return new WaitForSeconds(TimerCooldownBegin);
+		strafing = true;
+		StartCoroutine(CooldownEnd());
+	}
+	
+	IEnumerator	CooldownEnd()
+	{
+		yield return new WaitForSeconds(TimerCooldownEnd);
+		strafing = false;
 	}
 }
