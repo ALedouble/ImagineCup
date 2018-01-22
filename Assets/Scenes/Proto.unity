@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dca06ad255478e4c9f2165060cc38fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 60
+  moveSpeed: 30
   weaponPosition: {fileID: 4820604180801376, guid: d73d2b8feaf72c74fa09184c45ac3035,
     type: 2}
   useController: 1
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boatController: {fileID: 0}
-  TimerCooldownBegin: 0.5
+  TimerCooldownBegin: 0.15
   TimerCooldownEnd: 2
 --- !u!1001 &635818804
 Prefab:

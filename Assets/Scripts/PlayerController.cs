@@ -59,24 +59,31 @@ public class PlayerController : MonoBehaviour
 		moveVelocity = moveInput * moveSpeed;
 
 		/// Nitro
-        if ((moveVertical >= 0.5f))           
+        if (moveVertical >= 0.5 && moveSpeed < 60)           
         {
-            nitro = true;
+        	moveSpeed += 0.15f;
+        	nitro = true;
+            StartCoroutine(Acceleration());
         }
-        else
-        {
-            nitro = false;
-        }
+        
+		if (moveVertical <= 0.2 && moveSpeed > 30)           
+		{
+			moveSpeed -= 0.15f;
+			StartCoroutine(Decelerate());
+		}
+        
+        
+        
 
         if (Input.GetButton("Nitro") && nitro == true && moveSpeed < 90)
         {
-            Camera.main.fieldOfView += 0.2f;
+//            Camera.main.fieldOfView += 0.2f;
             moveSpeed += 1;
         }
 
-		if (nitro == false && moveSpeed > 60) 
+		if (Input.GetButton("Nitro") && nitro == false && moveSpeed > 60) 
 		{
-			Camera.main.fieldOfView -= 0.2f;
+//			Camera.main.fieldOfView -= 0.2f;
 			moveSpeed -= 1;
 		}
 
@@ -84,7 +91,7 @@ public class PlayerController : MonoBehaviour
 			moveSpeed -= 3;
 		}
 
-		if (moveVertical >= -0.5f && moveSpeed < 60){
+		if (moveVertical >= -0.5f && moveSpeed < 30){
 			moveSpeed += 3;
 		}
     }
@@ -184,10 +191,16 @@ public class PlayerController : MonoBehaviour
 
 
 	
-	IEnumerator cooldownStrafe()
+	IEnumerator Acceleration()
 	{
-		yield return new WaitForSeconds (0f);
-		cooldown = 0;
+		yield return new WaitForSeconds (4f);
+		moveSpeed = 60;
+	}
+	
+	IEnumerator Decelerate()
+	{
+		yield return new WaitForSeconds (4f);
+		moveSpeed = 30;
 	}
 
 }

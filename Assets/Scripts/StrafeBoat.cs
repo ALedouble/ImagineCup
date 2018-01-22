@@ -8,13 +8,16 @@ public class StrafeBoat : MonoBehaviour {
 	public float TimerCooldownBegin;
 	public float TimerCooldownEnd;
 
+
 	private Vector3 startPos;
 	private Vector3 endPos;
 	private float distance = 10f;
 	private float lerpTime = 0.5f;
 	private float currentLerpTime = 0;
 	private bool strafing = false;
+	private bool strafingLeft = false;
 	Rigidbody myRb;
+	
 	
 	
 	// Use this for initialization
@@ -29,23 +32,30 @@ public class StrafeBoat : MonoBehaviour {
 	
 		print (strafing);
 		
-		if (Input.GetButton ("Strafe1") && strafing == false)
+		if (Input.GetButton ("Strafe2") && strafingLeft == false)
 		{
-			StartCoroutine(CooldownBegin());
-			transform.position += transform.right * 0.4f;
+			StartCoroutine(CooldownLeftBegin());
+			transform.position += transform.right * 0.8f;
 		}
 		
 		
-		if (Input.GetButton ("Strafe2") && strafing == false)
+		if (Input.GetButton ("Strafe1") && strafing == false)
 		{
-			StartCoroutine(CooldownBegin());
-			transform.position -= transform.right * 0.4f;
+			StartCoroutine(CooldownRightBegin());
+			transform.position -= transform.right  * 0.8f;
 		}
 		
 		
 	}
 	
-	IEnumerator	CooldownBegin()
+	IEnumerator	CooldownLeftBegin()
+	{
+		yield return new WaitForSeconds(TimerCooldownBegin);
+		strafingLeft = true;
+		StartCoroutine(CooldownEndLeft());
+	}
+	
+	IEnumerator	CooldownRightBegin()
 	{
 		yield return new WaitForSeconds(TimerCooldownBegin);
 		strafing = true;
@@ -56,5 +66,11 @@ public class StrafeBoat : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(TimerCooldownEnd);
 		strafing = false;
+	}
+	
+	IEnumerator	CooldownEndLeft()
+	{
+		yield return new WaitForSeconds(TimerCooldownEnd);
+		strafingLeft = false;
 	}
 }
