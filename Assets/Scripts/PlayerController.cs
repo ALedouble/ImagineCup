@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject BatteringRamInstance;
 	public SlopeDetection sloping;
 	public GameObject meshBoat;
+	public GameObject desert;
 
 	private int cooldown;
 	private float elevation;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+		Debug.Log(resultHeight);
 		UseController ();
 		IdleRotation ();
 		BatteringRam ();
@@ -144,6 +146,8 @@ public class PlayerController : MonoBehaviour
 
 	void IdleRotation()
     {
+    
+		float rotateHorizontal = Input.GetAxis ("RHorizontal");
 		if (transform.position.y < 0.3)
 		{
 			elevator = true;
@@ -156,9 +160,9 @@ public class PlayerController : MonoBehaviour
 		
 
 
-		float rotz = Mathf.PingPong (Time.time * 4, 20);
+			float rotz = Mathf.PingPong (Time.time * 4, 20);
 		
-		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotz - 10);			
+			transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotz - 10);			
 
 
 		
@@ -172,15 +176,21 @@ public class PlayerController : MonoBehaviour
 
 		if (Physics.Raycast(middleBoat, Vector3.down, out hit, 700000))
 		{
-			elevation = Vector3.Distance (height, hit.collider.gameObject.transform.position);
+			print(hit.collider.gameObject.name);
+			elevation = Vector3.Distance (height, transform.position);
 			Debug.DrawRay(middleBoat, -transform.up, Color.blue);
 			
 			resultHeight = hit.distance;
 		}
 
-		if (resultHeight > 0.7)
+		if (resultHeight > 4f)
 		{
-			transform.GetComponent<Rigidbody>().AddForce(0, -6000f, 0);
+			transform.GetComponent<Rigidbody>().AddForce(0, -30000f, 0);
+		}
+		
+		if (resultHeight < 1f)
+		{
+			transform.GetComponent<Rigidbody>().AddForce(0, 0, 0);
 		}
 	}
 

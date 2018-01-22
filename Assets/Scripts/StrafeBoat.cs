@@ -29,9 +29,6 @@ public class StrafeBoat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-	
-		print (strafing);
-		
 		if (Input.GetButton ("Strafe2") && strafingLeft == false)
 		{
 			StartCoroutine(CooldownLeftBegin());
@@ -44,8 +41,6 @@ public class StrafeBoat : MonoBehaviour {
 			StartCoroutine(CooldownRightBegin());
 			transform.position -= transform.right  * 0.8f;
 		}
-		
-		
 	}
 	
 	IEnumerator	CooldownLeftBegin()
