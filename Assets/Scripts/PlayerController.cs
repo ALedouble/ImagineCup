@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
     {
 		UseController ();
 		IdleRotation ();
-		BatteringRam ();
 		IsGrounded();
 
 
@@ -113,29 +112,6 @@ public class PlayerController : MonoBehaviour
 			transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z);
         }
     }
-
-	void BatteringRam()
-	{
-		if (Input.GetButton("BatteringRam") && BatteringNumber == 0)
-		{
-			BatteringRamInstance = (GameObject)Instantiate(batteringPrefab, transform.position, Quaternion.identity);
-			BatteringRamInstance.transform.parent = transform;
-			BatteringRamInstance.transform.localPosition = new Vector3(-0.432f, 5.333f, 2.414f);
-			BatteringRamInstance.transform.rotation = transform.rotation;
-			BatteringNumber += 1;
-		}	
-
-		if (GameObject.Find ("Bélier(Clone)") && Input.GetButtonUp("BatteringRam")) 
-		{
-			Destroy(BatteringRamInstance);
-		}
-
-		if (!GameObject.Find ("Bélier(Clone)") && BatteringNumber == 1) 
-		{
-			BatteringNumber -= 1;
-		}
-	}
-
 	void IdleRotation()
     {
     

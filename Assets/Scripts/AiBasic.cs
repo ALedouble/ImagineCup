@@ -12,10 +12,12 @@ using UnityEngine.AI;
 	public NavMeshAgent agent;
 	
 	private bool attach;
+	Collider boxCollider;
 	
 	void Start(){
 		target = PlayerManager.instance.player.transform;
 		agent = GetComponent<NavMeshAgent>();
+		boxCollider = GetComponent<BoxCollider>();
 	}
 	
 	void Update(){
@@ -38,6 +40,7 @@ using UnityEngine.AI;
 				transform.parent = boat.transform;
 				transform.position = boat.transform.position + new Vector3(Random.Range(-0.3f,0.6f), Random.Range(0f,0.6f), Random.Range(-0.3f,0.6f));
 				agent.speed = 0;
+				boxCollider.isTrigger = true;
 				attach = true;
 				transform.gameObject.tag = "EnnemiTouche";
 				agent.enabled = false;
