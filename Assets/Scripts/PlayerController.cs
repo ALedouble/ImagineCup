@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-		Debug.Log(resultHeight);
 		UseController ();
 		IdleRotation ();
 		BatteringRam ();
@@ -61,27 +60,20 @@ public class PlayerController : MonoBehaviour
 		moveVelocity = moveInput * moveSpeed;
 
 		/// Nitro
-        if (moveVertical >= 0.5 && moveSpeed < 60)           
+		if (!Input.GetButton("Nitro") && moveVertical >= 0.5 && moveSpeed < 60)           
         {
-        	moveSpeed += 0.15f;
-        	nitro = true;
-            StartCoroutine(Acceleration());
+        	StartCoroutine(Acceleration());
         }
-        
-		if (moveVertical <= 0.2 && moveSpeed > 30)           
+		else if (Input.GetButton("Nitro") && moveSpeed < 90)
 		{
-			moveSpeed -= 0.15f;
-			StartCoroutine(Decelerate());
+			moveSpeed += 1;
 		}
         
-        
-        
-
-        if (Input.GetButton("Nitro") && nitro == true && moveSpeed < 90)
-        {
-//            Camera.main.fieldOfView += 0.2f;
-            moveSpeed += 1;
-        }
+		if (moveVertical < 0.5 && moveSpeed > 30)           
+		{
+			StartCoroutine(Decelerate());
+		}
+       
 
 		if (Input.GetButton("Nitro") && nitro == false && moveSpeed > 60) 
 		{
@@ -89,8 +81,8 @@ public class PlayerController : MonoBehaviour
 			moveSpeed -= 1;
 		}
 
-		if (moveVertical <= -0.5f && moveSpeed > 10){
-			moveSpeed -= 3;
+		if (moveVertical <= -0.5f && moveSpeed > 30){
+			moveSpeed -= 0.15f;
 		}
 
 		if (moveVertical >= -0.5f && moveSpeed < 30){
@@ -176,7 +168,6 @@ public class PlayerController : MonoBehaviour
 
 		if (Physics.Raycast(middleBoat, Vector3.down, out hit, 700000))
 		{
-			print(hit.collider.gameObject.name);
 			elevation = Vector3.Distance (height, transform.position);
 			Debug.DrawRay(middleBoat, -transform.up, Color.blue);
 			
@@ -187,7 +178,6 @@ public class PlayerController : MonoBehaviour
 		{
 			transform.GetComponent<Rigidbody>().AddForce(0, -30000f, 0);
 		}
-		
 		if (resultHeight < 1f)
 		{
 			transform.GetComponent<Rigidbody>().AddForce(0, 0, 0);
@@ -203,14 +193,14 @@ public class PlayerController : MonoBehaviour
 	
 	IEnumerator Acceleration()
 	{
+		moveSpeed += 0.15f;
 		yield return new WaitForSeconds (4f);
-		moveSpeed = 60;
 	}
 	
 	IEnumerator Decelerate()
 	{
+		moveSpeed -= 0.15f;
 		yield return new WaitForSeconds (4f);
-		moveSpeed = 30;
 	}
 
 }

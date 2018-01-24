@@ -6,9 +6,12 @@ using UnityEngine.AI;
 	public class AiBasic : MonoBehaviour {
 	
 	public float lookRadius = 10f;
+	public GameObject boat; 
 	
 	public Transform target;
 	public NavMeshAgent agent;
+	
+	private bool attach;
 	
 	void Start(){
 		target = PlayerManager.instance.player.transform;
@@ -18,13 +21,27 @@ using UnityEngine.AI;
 	void Update(){
 		float distance = Vector3.Distance(target.position, transform.position);
 		
-		if (distance <= lookRadius)
+		if (distance <= lookRadius && attach == false)
 		{
 			agent.SetDestination(target.position);
 
 			if (distance <= agent.stoppingDistance)
 			{
 				FaceTarget();
+			}
+		}
+		
+		if (distance < 3)
+		{
+		if (attach == false)
+			{ 
+				transform.parent = boat.transform;
+				transform.position = boat.transform.position + new Vector3(Random.Range(-0.3f,0.6f), Random.Range(0f,0.6f), Random.Range(-0.3f,0.6f));
+				agent.speed = 0;
+				attach = true;
+				transform.gameObject.tag = "EnnemiTouche";
+				agent.enabled = false;
+				Physics.gravity = Vector3.zero;
 			}
 		}
 	}

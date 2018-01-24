@@ -16,6 +16,11 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     private bool lookAt = true;
+    
+    void Start()
+    {
+    	offsetPosition.x = 20;
+    }
 
     private void LateUpdate()
     {
@@ -24,6 +29,22 @@ public class CameraController : MonoBehaviour
 
     public void Refresh()
     {
+    
+		if (offsetPosition.x > 3f)
+    	{
+    		offsetPosition.x -= 0.5f;
+    	}
+    	
+		if (offsetPosition.x <= 3f )
+		{
+			offsetPosition.x -= 0.15f;
+		}
+		
+		if (offsetPosition.x <= 0.2f )
+		{
+			offsetPosition.x = 0f;
+		}
+    	
         float spinangle = Mathf.Clamp(0, 70f, 179f);
         transform.rotation = Quaternion.Euler(spinangle, 0, 0);
 
