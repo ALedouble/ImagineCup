@@ -12,7 +12,7 @@ public class CannonBall : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		rb.velocity = Camera.main.transform.forward * 20;
-		rb.AddForce( -transform.up * 200f);
+		rb.velocity = Camera.main.transform.forward * 30;
+		rb.AddForce( -transform.up * 150f);
 	}
 }
