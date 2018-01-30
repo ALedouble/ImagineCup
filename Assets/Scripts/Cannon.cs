@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour {
 	public GameObject prefab;
 	public GameObject cannonLaucher;
 	private float InstantiationTimer = 1f;
+	private bool stickDownLast;
 	
 	
 	void Start() {
@@ -16,16 +17,22 @@ public class Cannon : MonoBehaviour {
 	void Update(){
 		if (Input.GetAxisRaw("electricChoc") < -0.5)
 		{
-			InstantiationTimer -= Time.deltaTime;
-			if (InstantiationTimer <= 0)
+				if(!stickDownLast){
+				
+					GameObject CannonBalls = Instantiate(prefab) as GameObject;
+					prefab.transform.position = new Vector3 (cannonLaucher.transform.position.x, cannonLaucher.transform.position.y + 0.8f, cannonLaucher.transform.position.z);
+					InstantiationTimer = 1f;
+					stickDownLast = true;
+				}
+			}
+			else 
 			{
-				GameObject CannonBalls = Instantiate(prefab) as GameObject;
-				prefab.transform.position = new Vector3 (cannonLaucher.transform.position.x, cannonLaucher.transform.position.y, cannonLaucher.transform.position.z);
-				InstantiationTimer = 1f;
+				stickDownLast = false;
+				prefab.transform.position = new Vector3 (cannonLaucher.transform.position.x, cannonLaucher.transform.position.y + 0.8f, cannonLaucher.transform.position.z);
 			}
 		}
 	}
 	
 
-}
+
 	

@@ -5,14 +5,46 @@ using UnityEngine;
 public class CannonBall : MonoBehaviour {
 
 	Rigidbody rb;
+	public GameObject boat;
+	private float timer = 4f;
+	private float freezeTimer = 0f;
+	
+	
 	// Use this for initialization
 	void Start () {
+		Vector3 forwredv3 = Camera.main.transform.forward;     
+		Vector3 forwredv3fixed = new Vector3 (0, 5, 0);
+		
 		rb = GetComponent<Rigidbody>();
+		rb.velocity = forwredv3 * 40;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		rb.velocity = Camera.main.transform.forward * 30;
-		rb.AddForce( -transform.up * 150f);
+	
+		timer -= Time.deltaTime; 
+		
+		if (timer < 0){
+			rb.AddForce( -transform.up * 200f);
+			rb.useGravity = true;
+		}
+		else
+		{
+			rb.useGravity = false;
+		}
+		
+		freezeTimer += Time.deltaTime;
+		
+		if (freezeTimer < 0.05f)
+		{
+			print("test");
+			rb.constraints = RigidbodyConstraints.FreezePositionY;
+		}
+		else
+		{
+			rb.AddForce( -transform.up * 200f);
+			rb.constraints = RigidbodyConstraints.None;
+		}
 	}
 }

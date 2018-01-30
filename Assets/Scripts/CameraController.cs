@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour
         if (lookAt)
         {
             transform.LookAt(target);
-			transform.rotation = Quaternion.Euler (16, transform.eulerAngles.y, transform.eulerAngles.z);
+			transform.rotation = Quaternion.Euler (transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         }
         else
         {
