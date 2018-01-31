@@ -8,15 +8,29 @@ public class CannonBall : MonoBehaviour {
 	public GameObject boat;
 	private float timer = 4f;
 	private float freezeTimer = 0f;
+	private float moveVertical;
 	
 	
 	// Use this for initialization
 	void Start () {
+		moveVertical = Input.GetAxis ("Vertical"); /// Devant
 		Vector3 forwredv3 = Camera.main.transform.forward;     
 		Vector3 forwredv3fixed = new Vector3 (0, 5, 0);
 		
 		rb = GetComponent<Rigidbody>();
-		rb.velocity = forwredv3 * 40;
+		
+		
+		if (moveVertical > 0)
+		{
+			rb.velocity = forwredv3 * 40 * moveVertical;
+		}
+		
+		if (moveVertical == 0)
+		{
+			rb.velocity = forwredv3 * 40;
+		}
+		
+		
 
 	}
 	

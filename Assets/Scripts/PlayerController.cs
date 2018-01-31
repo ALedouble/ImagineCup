@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 	public SlopeDetection sloping;
 	public GameObject meshBoat;
 	public GameObject desert;
+	public float moveVertical; 
 
 	private int cooldown;
 	private float elevation;
@@ -45,8 +46,8 @@ public class PlayerController : MonoBehaviour
 
 
 		
-
-		float moveVertical = Input.GetAxis ("Vertical"); /// Devant
+		print (moveVertical);
+		moveVertical = Input.GetAxis ("Vertical"); /// Devant
 		float moveHorizontal = Input.GetAxis ("Horizontal"); /// Sur les 
 		float rotateVertical = Input.GetAxis ("RVertical"); /// Devant
 		float rotateHorizontal = Input.GetAxis ("RHorizontal"); /// Sur les côtés
