@@ -52,7 +52,6 @@ public class CannonBall : MonoBehaviour {
 		
 		if (freezeTimer < 0.05f)
 		{
-			print("test");
 			rb.constraints = RigidbodyConstraints.FreezePositionY;
 		}
 		else

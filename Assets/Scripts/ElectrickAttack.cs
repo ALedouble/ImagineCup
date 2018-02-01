@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ElectrickAttack : MonoBehaviour {
 
+	public AiBasic ennemyLife;
 	private bool stickDownLast;
-	private int lifeEnnemy; 
+
 	
 	// Use this for initialization
 	void Start () {
-		lifeEnnemy = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -19,8 +20,9 @@ public class ElectrickAttack : MonoBehaviour {
 		
 			if(!stickDownLast)
 			{
-				lifeEnnemy += 1;
-				Destroy (GameObject.FindWithTag("EnnemiTouche"));
+				if (ennemyLife.attach == false) {
+					ennemyLife.life -= 1;
+				}
 			}
 		
 			if(stickDownLast){

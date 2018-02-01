@@ -10,9 +10,13 @@ using UnityEngine.AI;
 	
 	public Transform target;
 	public NavMeshAgent agent;
+	public GameObject lifeBar;
 	
-	private bool attach;
+	public bool attach;
+	public int life;
 	Collider boxCollider;
+
+	private float attackTimer = 2f;
 	
 	void Start(){
 		target = PlayerManager.instance.player.transform;
@@ -21,6 +25,7 @@ using UnityEngine.AI;
 	}
 	
 	void Update(){
+		Attack ();
 		float distance = Vector3.Distance(target.position, transform.position);
 		
 		if (distance <= lookRadius && attach == false)
@@ -62,4 +67,26 @@ using UnityEngine.AI;
 		Gizmos.DrawWireSphere(transform.position, lookRadius);
 	}
 
+	void isDeath()
+	{
+		if (life <= 0 && attach == false) 
+		{
+			Destroy (GameObject.FindWithTag ("EnnemiTouche"));
+		}
+	}
+
+	void Attack()
+	{
+		if (attach == true) 
+		{
+			attackTimer -= Time.deltaTime;
+			print ("oui");
+
+			if (attackTimer <= 0)
+			{
+				lifeBar.transform.localScale -= new Vector3 (0.15f, 0, 0);
+				attackTimer = 2;
+			}
+		}
+	}
 }

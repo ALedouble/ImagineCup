@@ -43,10 +43,6 @@ public class PlayerController : MonoBehaviour
 		IdleRotation ();
 		IsGrounded();
 
-
-
-		
-		print (moveVertical);
 		moveVertical = Input.GetAxis ("Vertical"); /// Devant
 		float moveHorizontal = Input.GetAxis ("Horizontal"); /// Sur les 
 		float rotateVertical = Input.GetAxis ("RVertical"); /// Devant
