@@ -29,43 +29,16 @@ public class StrafeBoat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetButton ("Strafe2") && strafingLeft == false)
+		if (Input.GetAxis ("Horizontal") < -0.5 && strafingLeft == false)
 		{
-			StartCoroutine(CooldownLeftBegin());
-			transform.position += transform.right * 0.8f;
+			transform.position -= transform.right * 0.2f;
 		}
 		
 		
-		if (Input.GetButton ("Strafe1") && strafing == false)
+		if (Input.GetAxis ("Horizontal") > 0.5)
 		{
-			StartCoroutine(CooldownRightBegin());
-			transform.position -= transform.right  * 0.8f;
+			transform.position += transform.right  * 0.2f;
 		}
 	}
-	
-	IEnumerator	CooldownLeftBegin()
-	{
-		yield return new WaitForSeconds(TimerCooldownBegin);
-		strafingLeft = true;
-		StartCoroutine(CooldownEndLeft());
-	}
-	
-	IEnumerator	CooldownRightBegin()
-	{
-		yield return new WaitForSeconds(TimerCooldownBegin);
-		strafing = true;
-		StartCoroutine(CooldownEnd());
-	}
-	
-	IEnumerator	CooldownEnd()
-	{
-		yield return new WaitForSeconds(TimerCooldownEnd);
-		strafing = false;
-	}
-	
-	IEnumerator	CooldownEndLeft()
-	{
-		yield return new WaitForSeconds(TimerCooldownEnd);
-		strafingLeft = false;
-	}
+
 }

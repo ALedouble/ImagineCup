@@ -22,7 +22,7 @@ public class CannonBall : MonoBehaviour {
 		
 		if (moveVertical > 0)
 		{
-			rb.velocity = forwredv3 * 40 * moveVertical;
+			rb.velocity = forwredv3 * 100;
 		}
 		
 		if (moveVertical == 0)

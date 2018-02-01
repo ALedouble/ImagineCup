@@ -15,7 +15,8 @@ using UnityEngine.AI;
 	public bool attach;
 	public int life;
 	Collider boxCollider;
-
+	
+	private bool destroyEnnemi;
 	private float attackTimer = 2f;
 	
 	void Start(){
@@ -26,6 +27,7 @@ using UnityEngine.AI;
 	
 	void Update(){
 		Attack ();
+		isDeath();
 		float distance = Vector3.Distance(target.position, transform.position);
 		
 		if (distance <= lookRadius && attach == false)
@@ -40,7 +42,7 @@ using UnityEngine.AI;
 		
 		if (distance < 3)
 		{
-		if (attach == false)
+			if (attach == false)
 			{ 
 				transform.parent = boat.transform;
 				transform.position = boat.transform.position + new Vector3(Random.Range(-0.3f,0.6f), Random.Range(0f,0.6f), Random.Range(-0.3f,0.6f));
@@ -69,9 +71,10 @@ using UnityEngine.AI;
 
 	void isDeath()
 	{
-		if (life <= 0 && attach == false) 
+		if (life == 0 && attach == true) 
 		{
 			Destroy (GameObject.FindWithTag ("EnnemiTouche"));
+			destroyEnnemi = true;
 		}
 	}
 
@@ -80,8 +83,6 @@ using UnityEngine.AI;
 		if (attach == true) 
 		{
 			attackTimer -= Time.deltaTime;
-			print ("oui");
-
 			if (attackTimer <= 0)
 			{
 				lifeBar.transform.localScale -= new Vector3 (0.15f, 0, 0);
