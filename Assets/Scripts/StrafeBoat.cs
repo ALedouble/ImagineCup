@@ -29,15 +29,15 @@ public class StrafeBoat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetAxis ("Horizontal") < -0.5 && strafingLeft == false)
+		if (Input.GetAxis ("Horizontal") <= -0.5f && strafingLeft == false)
 		{
-			transform.position -= transform.right * 0.2f;
+			transform.position -= transform.right * 0.4f;
 		}
 		
 		
-		if (Input.GetAxis ("Horizontal") > 0.5)
+		if (Input.GetAxis ("Horizontal") >= 0.5f)
 		{
-			transform.position += transform.right  * 0.2f;
+			transform.position += transform.right  * 0.4f;
 		}
 	}
 
