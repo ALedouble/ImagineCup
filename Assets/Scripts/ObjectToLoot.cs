@@ -11,11 +11,11 @@ public class ObjectToLoot : MonoBehaviour {
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
-		transform.eulerAngles = new Vector3(transform.localEulerAngles.x, Random.Range(0, 360), transform.localEulerAngles.x);
+		transform.eulerAngles = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
 		float speed = 7;
 		rb.isKinematic = false;
-		Vector3 force = -transform.up;
-		force = new Vector3(force .x, 1, force .z);
+		Vector3 force = -transform.up * 5;
+		force = new Vector3(force .x, 0.5f, force .z);
 		rb.AddForce(force * speed );
 		Physics.IgnoreCollision(loot.GetComponent<Collider>(), GetComponent<Collider>());
 	}
@@ -32,7 +32,7 @@ public class ObjectToLoot : MonoBehaviour {
 		{
 			rb.constraints = RigidbodyConstraints.FreezeRotationX;
 			rb.constraints = RigidbodyConstraints.FreezeRotationZ; 
-			rb.velocity = -Vector3.up * 5; 
+			rb.velocity = -Vector3.up * 10; 
 		}
 	}
 }

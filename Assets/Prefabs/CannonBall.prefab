@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23152313887324504}
   - component: {fileID: 114850409960745068}
   - component: {fileID: 54606011107652250}
+  - component: {fileID: 135348863854337244}
   m_Layer: 0
   m_Name: CannonBall
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939790830244926}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.813608, y: 4.255188, z: -17.681246}
+  m_LocalPosition: {x: -3.1700485, y: 2.801205, z: -25.815083}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,4 +109,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00a24861b9f3d047b6eaab5f4f9df9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 1979613153918454, guid: de3eab4cb0d969740b631630ae14b200,
+    type: 2}
   boat: {fileID: 100000, guid: 6a01374766f8fd8438a1fb122ed0b61f, type: 3}
+--- !u!135 &135348863854337244
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939790830244926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

@@ -15,18 +15,22 @@ public class PlayerController : MonoBehaviour
 	public GameObject meshBoat;
 	public GameObject desert;
 	public float moveVertical; 
+	public GameObject dustInstance;
 
+	private float moveHorizontal;
 	private int cooldown;
 	private float elevation;
 	private Rigidbody myRigidbody;
 	private bool nitro;
 	private float distanceGround;
 	private Vector3 moveInput;
-	private Vector3 moveVelocity;
+	public Vector3 moveVelocity;
 	private RaycastHit hit;
 	private Camera mainCamera;
 	private int BatteringNumber;
 	private float resultHeight;
+	private GameObject dustPrefab;
+	private bool dust;
 	
 
     void Start()
@@ -44,7 +48,7 @@ public class PlayerController : MonoBehaviour
 		IsGrounded();
 
 		moveVertical = Input.GetAxis ("Vertical"); /// Devant
-		float moveHorizontal = Input.GetAxis ("Horizontal"); /// Sur les 
+		moveHorizontal = Input.GetAxis ("Horizontal"); /// Sur les 
 		float rotateVertical = Input.GetAxis ("RVertical"); /// Devant
 		float rotateHorizontal = Input.GetAxis ("RHorizontal"); /// Sur les côtés
 
@@ -65,6 +69,25 @@ public class PlayerController : MonoBehaviour
 			moveSpeed += 1;
 		}
         
+
+			
+		if ((moveVertical > 0.5f || moveVertical < -0.5f) && dust == false) {
+			Vector3 particlePosition = new Vector3 (transform.position.x, transform.position.y + 5f, transform.position.z);
+			dustPrefab = (GameObject)Instantiate (dustInstance, particlePosition, transform.rotation);
+			dustPrefab.transform.parent = transform;
+			dust = true;
+		}
+
+		if (dustPrefab != null) 
+		{
+			if ((moveVertical == 0 || moveVertical == 0)) {
+				ParticleSystem parts = dustPrefab.GetComponent<ParticleSystem> ();
+				float totalduration = parts.duration + parts.startLifetime;
+				Destroy (dustPrefab, totalduration);
+				dust = false;
+			}
+		}
+
 		if (moveVertical < 0.5 && moveSpeed > 30)           
 		{
 			StartCoroutine(Decelerate());

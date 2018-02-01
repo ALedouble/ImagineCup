@@ -5,8 +5,11 @@ using UnityEngine;
 public class ElectrickAttack : MonoBehaviour {
 
 	public List<AiBasic> ennemyLifeList;
+	public GameObject electrickPrefab;
+
+
 	private bool stickDownLast;
-	
+	private GameObject electrickParticle;
 
 	
 	// Use this for initialization
@@ -25,7 +28,13 @@ public class ElectrickAttack : MonoBehaviour {
 				{
 					if(!stickDownLast){
 						ennemyLifeList[i].life -= 1;
+						Vector3 particlePosition = new Vector3 (transform.position.x, transform.position.y + 3.5f, transform.position.z);
+						electrickParticle = (GameObject)Instantiate(electrickPrefab, particlePosition, transform.rotation);
+						electrickParticle.transform.parent = transform;
 						stickDownLast = true;
+						ParticleSystem parts = electrickParticle.GetComponent<ParticleSystem> ();
+						float totalduration = parts.duration + parts.startLifetime;
+						Destroy (electrickParticle, totalduration);
 					}
 				}
 				else 
