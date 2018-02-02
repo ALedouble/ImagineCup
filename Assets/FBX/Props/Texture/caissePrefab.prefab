@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114196146909787676}
   - component: {fileID: 65658662817033692}
   m_Layer: 0
-  m_Name: newCactus
+  m_Name: caissePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
