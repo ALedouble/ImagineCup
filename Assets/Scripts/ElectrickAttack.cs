@@ -6,6 +6,7 @@ public class ElectrickAttack : MonoBehaviour {
 
 	public List<AiBasic> ennemyLifeList;
 	public GameObject electrickPrefab;
+	public AiBasic ennemy;
 
 
 	private bool stickDownLast;
@@ -26,15 +27,20 @@ public class ElectrickAttack : MonoBehaviour {
 			{
 				if (Input.GetAxis("electricChoc") > 0.5)
 				{
+					
 					if(!stickDownLast){
-						ennemyLifeList[i].life -= 1;
 						Vector3 particlePosition = new Vector3 (transform.position.x, transform.position.y + 3.5f, transform.position.z);
 						electrickParticle = (GameObject)Instantiate(electrickPrefab, particlePosition, transform.rotation);
 						electrickParticle.transform.parent = transform;
-						stickDownLast = true;
 						ParticleSystem parts = electrickParticle.GetComponent<ParticleSystem> ();
 						float totalduration = parts.duration + parts.startLifetime;
 						Destroy (electrickParticle, totalduration);
+						stickDownLast = true;
+						if (ennemy.attach == true)
+						{
+							ennemyLifeList[i].life -= 1;
+						}
+						
 					}
 				}
 				else 

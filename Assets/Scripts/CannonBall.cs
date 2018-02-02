@@ -11,7 +11,7 @@ public class CannonBall : MonoBehaviour {
 	private float freezeTimer = 0f;
 	private float moveVertical;
 	private GameObject explosionBomb;
-
+	public bool shoot;
 	
 	
 	// Use this for initialization
@@ -32,7 +32,6 @@ public class CannonBall : MonoBehaviour {
 		timer -= Time.deltaTime; 
 		
 		if (timer < 0){
-			print ("true");
 			rb.AddForce( -transform.up * 2000f);
 			rb.useGravity = true;
 		}
@@ -62,6 +61,15 @@ public class CannonBall : MonoBehaviour {
 			ParticleSystem parts = explosionBomb.GetComponent<ParticleSystem> ();
 			float totalduration = parts.duration + parts.startLifetime;
 			Destroy (explosionBomb, totalduration);
+		}
+		
+		if (collision.gameObject.name == "Convoi") {
+			explosionBomb =  (GameObject)Instantiate(explosionPrefab, transform.position, transform.rotation);
+			Destroy (gameObject);
+			ParticleSystem parts = explosionBomb.GetComponent<ParticleSystem> ();
+			float totalduration = parts.duration + parts.startLifetime;
+			Destroy (explosionBomb, totalduration);
+			shoot = true;
 		}
 	}
 }

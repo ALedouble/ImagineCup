@@ -6,7 +6,7 @@ public class ObjectToLoot : MonoBehaviour {
 
 	public GameObject loot;
 	private Rigidbody rb;
-	private float timeGravity = 1f;
+	private float timeGravity = 0.4f;
 	
 	void Start()
 	{
@@ -14,7 +14,7 @@ public class ObjectToLoot : MonoBehaviour {
 		transform.eulerAngles = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
 		float speed = 7;
 		rb.isKinematic = false;
-		Vector3 force = -transform.up * 5;
+		Vector3 force = -transform.up * 100;
 		force = new Vector3(force .x, 0.5f, force .z);
 		rb.AddForce(force * speed );
 		Physics.IgnoreCollision(loot.GetComponent<Collider>(), GetComponent<Collider>());
@@ -26,13 +26,14 @@ public class ObjectToLoot : MonoBehaviour {
 		
 		if ( timeGravity > 0 )
 		{
+			rb.velocity = Vector3.up * 50; 
 		}
 		
 		if ( timeGravity <= 0 )
 		{
 			rb.constraints = RigidbodyConstraints.FreezeRotationX;
 			rb.constraints = RigidbodyConstraints.FreezeRotationZ; 
-			rb.velocity = -Vector3.up * 10; 
+			rb.velocity = -Vector3.up * 50; 
 		}
 	}
 }
