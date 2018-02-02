@@ -42,12 +42,12 @@ using UnityEngine.SceneManagement;
 			}
 		}
 		
-		if (distance < 3)
+		if (distance < 4.5f)
 		{
 			if (attach == false)
 			{ 
 				transform.parent = boat.transform;
-				transform.position = boat.transform.position + new Vector3(Random.Range(-0.3f,0.6f), Random.Range(0f,0.6f), Random.Range(-0.3f,0.6f));
+				transform.position = boat.transform.position + new Vector3(Random.Range(-0.3f,0.6f), Random.Range(0.6f,1.6f), Random.Range(-0.3f,0.6f));
 				agent.speed = 0;
 				boxCollider.isTrigger = true;
 				attach = true;

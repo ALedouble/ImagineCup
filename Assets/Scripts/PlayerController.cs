@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 	private bool nitro;
 	private float distanceGround;
 	private Vector3 moveInput;
+	private Vector3 moveStrafe;
 	public Vector3 moveVelocity;
 	private RaycastHit hit;
 	private Camera mainCamera;
@@ -60,7 +61,8 @@ public class PlayerController : MonoBehaviour
 		Vector3 forwredv3 = transform.forward;     
 		Vector3 forwredv3fixed = new Vector3 (forwredv3.x, 0, forwredv3.z);
 		moveInput = forwredv3fixed * Input.GetAxis ("Vertical");
-		moveVelocity = moveInput * moveSpeed;
+		moveStrafe = transform.right * 0.5f * Input.GetAxis("Horizontal");
+		moveVelocity = (moveInput + moveStrafe) * moveSpeed;
 
 		/// Nitro
 		if (!Input.GetButton("Nitro") && moveVertical >= 0.5 && moveSpeed < 60)           
@@ -131,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
         if (useController)
         {
-            transform.Rotate(Vector3.up, Input.GetAxis("RHorizontal") * 2.1f);
+            transform.Rotate(Vector3.up, Input.GetAxis("RHorizontal") * 2.6f);
 			transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z);
         }
     }
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        myRigidbody.velocity = moveVelocity;
+       myRigidbody.velocity = moveVelocity;
     }
 
 
