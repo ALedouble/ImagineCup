@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject desert;
 	public float moveVertical; 
 	public GameObject dustInstance;
+	public AiBasic aiScript;
 
 	private float moveHorizontal;
 	private int cooldown;
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
 		UseController ();
 		IdleRotation ();
 		IsGrounded();
+		isDead ();
 
 		moveVertical = Input.GetAxis ("Vertical"); /// Devant
 		moveHorizontal = Input.GetAxis ("Horizontal"); /// Sur les 
@@ -197,6 +200,13 @@ public class PlayerController : MonoBehaviour
 	{
 		moveSpeed -= 0.15f;
 		yield return new WaitForSeconds (4f);
+	}
+
+	void isDead()
+	{
+		if (aiScript.playerDead == true) {
+			Destroy (this.gameObject);
+		}
 	}
 
 }

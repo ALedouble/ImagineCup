@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 	public class AiBasic : MonoBehaviour {
 	
@@ -14,6 +15,7 @@ using UnityEngine.AI;
 	
 	public bool attach;
 	public int life;
+	public bool playerDead;
 	Collider boxCollider;
 	
 	private bool destroyEnnemi;
@@ -89,5 +91,18 @@ using UnityEngine.AI;
 				attackTimer = 2;
 			}
 		}
+
+		if (lifeBar.transform.localScale.x <= 0) {
+			playerDead = true;
+			StartCoroutine (MenuCoroutine());
+		}
 	}
+
+
+	IEnumerator MenuCoroutine()
+	{
+		yield return new WaitForSeconds (1f);
+		SceneManager.LoadScene ("Menu");
+	}
+
 }
