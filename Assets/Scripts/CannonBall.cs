@@ -63,7 +63,7 @@ public class CannonBall : MonoBehaviour {
 			Destroy (explosionBomb, totalduration);
 		}
 		
-		if (collision.gameObject.name == "Convoi") {
+		if (collision.gameObject.name == "Convoi 1") {
 			explosionBomb =  (GameObject)Instantiate(explosionPrefab, transform.position, transform.rotation);
 			Destroy (gameObject);
 			ParticleSystem parts = explosionBomb.GetComponent<ParticleSystem> ();

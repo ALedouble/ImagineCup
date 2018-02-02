@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33889975070679108}
   - component: {fileID: 23765773193615392}
   - component: {fileID: 54676517774769382}
-  - component: {fileID: 114107148818854696}
   m_Layer: 0
   m_Name: cactus_long
   m_TagString: Untagged
@@ -37,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1725467133120452}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 181.06473, y: 8.060362, z: 156.5442}
-  m_LocalScale: {x: 0.52107084, y: 0.52107084, z: 1.2515941}
+  m_LocalPosition: {x: -99.81936, y: 14.839999, z: 3.153122}
+  m_LocalScale: {x: 1.3858267, y: 1.3858271, z: 3.3287086}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,14 +96,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114107148818854696
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1725467133120452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10ec370a2e7644c4b9d8019bbb4c2a16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
