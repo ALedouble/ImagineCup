@@ -14,7 +14,7 @@ public class SmokeEffect : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		reacteur.transform.eulerAngles = new Vector3(0, -90, 0); 
+		reacteur.transform.eulerAngles = new Vector3(0, -20, 0); 
 	}
 	
 	// Update is called once per frame

@@ -7,6 +7,8 @@ public class ElectrickAttack : MonoBehaviour {
 	public List<AiBasic> ennemyLifeList;
 	public GameObject electrickPrefab;
 	public AiBasic ennemy;
+	public AudioClip clip;
+	AudioSource audio;
 
 
 	private bool stickDownLast;
@@ -15,10 +17,12 @@ public class ElectrickAttack : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+	audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
 		
 			for (int i = 0; i < ennemyLifeList.Count; i++) {
 				
@@ -27,8 +31,8 @@ public class ElectrickAttack : MonoBehaviour {
 			{
 				if (Input.GetAxis("electricChoc") > 0.5)
 				{
-					
 					if(!stickDownLast){
+						audio.PlayOneShot(clip, 1F);
 						Vector3 particlePosition = new Vector3 (transform.position.x, transform.position.y + 3.5f, transform.position.z);
 						electrickParticle = (GameObject)Instantiate(electrickPrefab, particlePosition, transform.rotation);
 						electrickParticle.transform.parent = transform;
@@ -36,11 +40,40 @@ public class ElectrickAttack : MonoBehaviour {
 						float totalduration = parts.duration + parts.startLifetime;
 						Destroy (electrickParticle, totalduration);
 						stickDownLast = true;
-						if (ennemy.attach == true)
+						if (ennemyLifeList[0].attach == true)
 						{
-							ennemyLifeList[i].life -= 1;
+							ennemyLifeList[0].life -= 1;
 						}
 						
+						if (ennemyLifeList[1].attach == true)
+						{
+							ennemyLifeList[1].life -= 1;
+						}
+						
+						if (ennemyLifeList[2].attach == true)
+						{
+							ennemyLifeList[2].life -= 1;
+						}
+						
+						if (ennemyLifeList[3].attach == true)
+						{
+							ennemyLifeList[3].life -= 1;
+						}
+						
+						if (ennemyLifeList[4].attach == true)
+						{
+							ennemyLifeList[4].life -= 1;
+						}
+						
+						if (ennemyLifeList[5].attach == true)
+						{
+							ennemyLifeList[5].life -= 1;
+						}
+						
+						if (ennemyLifeList[6].attach == true)
+						{
+							ennemyLifeList[6].life -= 1;
+						}
 					}
 				}
 				else 

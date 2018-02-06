@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class CannonBall : MonoBehaviour {
 
 	public GameObject explosionPrefab;
@@ -12,6 +13,8 @@ public class CannonBall : MonoBehaviour {
 	private float moveVertical;
 	private GameObject explosionBomb;
 	public bool shoot;
+	public AudioClip clip;
+	AudioSource audio;
 	
 	
 	// Use this for initialization
@@ -23,6 +26,7 @@ public class CannonBall : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 	
 		rb.velocity = Camera.main.transform.forward * 140;
+		audio = GetComponent<AudioSource>();
 		}
 		
 
@@ -61,6 +65,7 @@ public class CannonBall : MonoBehaviour {
 			ParticleSystem parts = explosionBomb.GetComponent<ParticleSystem> ();
 			float totalduration = parts.duration + parts.startLifetime;
 			Destroy (explosionBomb, totalduration);
+			audio.PlayOneShot(clip, 1F);
 		}
 		
 		if (collision.gameObject.name == "Convoi 1") {
@@ -70,6 +75,7 @@ public class CannonBall : MonoBehaviour {
 			float totalduration = parts.duration + parts.startLifetime;
 			Destroy (explosionBomb, totalduration);
 			shoot = true;
+			audio.PlayOneShot(clip, 1F);
 		}
 	}
 }

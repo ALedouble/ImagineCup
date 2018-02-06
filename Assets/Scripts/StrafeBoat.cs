@@ -27,18 +27,9 @@ public class StrafeBoat : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
-		if (Input.GetAxis ("Horizontal") <= -0.5f && strafingLeft == false)
-		{
-			transform.position -= transform.right * 0.4f;
-		}
 		
-		
-		if (Input.GetAxis ("Horizontal") >= 0.5f)
-		{
-			transform.position += transform.right  * 0.4f;
-		}
 	}
 
 }
