@@ -65,10 +65,18 @@ public class PlayerController : MonoBehaviour
 		moveVelocity = (moveInput + moveStrafe) * moveSpeed;
 
 		/// Nitro
-		if (!Input.GetButton("Nitro") && moveVertical >= 0.5 && moveSpeed < 60)           
+		if (moveVertical >= 0.5 && moveSpeed > 40 && Camera.main.fieldOfView < 90)           
         {
         	StartCoroutine(Acceleration());
+			Camera.main.fieldOfView += 0.3f;
+			
         }
+        
+		if (moveVertical <= 0.5 && moveSpeed > 60 && Camera.main.fieldOfView > 60)           
+		{
+			Camera.main.fieldOfView -= 0.5f;
+			
+		}
 		else if (Input.GetButton("Nitro") && moveSpeed < 90)
 		{
 			moveSpeed += 1;
