@@ -42,7 +42,7 @@ using UnityEngine.SceneManagement;
 			}
 		}
 		
-		if (distance < 4.5f)
+		if (distance < 10f)
 		{
 			if (attach == false)
 			{ 
