@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using NUnit.Framework.Internal.Filters;
 
 public class AiConvoi : MonoBehaviour {
 
