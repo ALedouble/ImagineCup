@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-<<<<<<< HEAD
-=======
 
->>>>>>> 8e83927a31948324631c196be8ede36d8fed917a
 
 public class AiConvoi : MonoBehaviour {
 
