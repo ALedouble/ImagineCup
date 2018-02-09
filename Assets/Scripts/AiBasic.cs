@@ -8,16 +8,21 @@ using UnityEngine.SceneManagement;
 	
 	public float lookRadius = 10f;
 	public GameObject boat; 
-	
+	public GameObject explosionPrefab;
 	public Transform target;
 	public NavMeshAgent agent;
 	public GameObject lifeBar;
+	public Transform[] path;
+	public float speed = 5.0f;
+	public float reachDist = 1.0f;
+	public int currentPoint = 0;
 	
 	public bool attach;
 	public int life;
 	public bool playerDead;
 	Collider boxCollider;
 	
+	private GameObject explosionBomb;
 	private bool destroyEnnemi;
 	private float attackTimer = 2f;
 	
@@ -42,7 +47,22 @@ using UnityEngine.SceneManagement;
 			}
 		}
 		
-		if (distance < 10f)
+		
+		if (distance >= lookRadius)
+		{
+			float dist = Vector3.Distance(path[currentPoint].position, transform.position);
+			transform.position = Vector3.MoveTowards(transform.position, path[currentPoint].position, Time.deltaTime*speed);
+			
+			if (dist <= reachDist){
+				currentPoint++;
+			}
+			
+			if (currentPoint >= path.Length){
+				currentPoint = 0;
+			}
+		}
+		
+		if (distance < 4f)
 		{
 			if (attach == false)
 			{ 
@@ -61,8 +81,8 @@ using UnityEngine.SceneManagement;
 	void FaceTarget()
 	{
 		Vector3 direction = (target.position - transform.position);
-		Quaternion lookRotation = Quaternion.LookRotation( new Vector3(direction.x, 0, direction.z));
-		transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+		Quaternion lookRotation = Quaternion.LookRotation( new Vector3(direction.x, direction.y, direction.z));
+		transform.rotation = Quaternion.Slerp(target.transform.rotation, lookRotation, Time.deltaTime * 20f);
 	}
 	
 	void OnDrawGizmosSelected()
@@ -77,6 +97,10 @@ using UnityEngine.SceneManagement;
 		{
 			Destroy (GameObject.FindWithTag ("EnnemiTouche"));
 			destroyEnnemi = true;
+			explosionBomb =  (GameObject)Instantiate(explosionPrefab, transform.position, transform.rotation);
+			ParticleSystem parts = explosionBomb.GetComponent<ParticleSystem> ();
+			float totalduration = parts.duration + parts.startLifetime;
+			Destroy (explosionBomb, totalduration);
 		}
 	}
 

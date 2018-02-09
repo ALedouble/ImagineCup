@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 	public float moveVertical; 
 	public GameObject dustInstance;
 	public AiBasic aiScript;
+	public GameObject[] reacteur;
 
 	private float moveHorizontal;
 	private int cooldown;
@@ -61,9 +62,22 @@ public class PlayerController : MonoBehaviour
 		Vector3 forwredv3 = transform.forward;     
 		Vector3 forwredv3fixed = new Vector3 (forwredv3.x, 0, forwredv3.z);
 		moveInput = forwredv3fixed * Input.GetAxis ("Vertical");
-		moveStrafe = transform.right * 0.5f * Input.GetAxis("Horizontal");
+		moveStrafe = transform.right * 0.75f * Input.GetAxis("Horizontal");
 		moveVelocity = (moveInput + moveStrafe) * moveSpeed;
 
+
+		if (moveVertical < 0)
+		{
+			reacteur[0].SetActive(false);
+			reacteur[1].SetActive(false);
+		}
+		
+		if (moveVertical > 0)
+		{
+			reacteur[0].SetActive(true);
+			reacteur[1].SetActive(true);
+		}
+		
 		/// Nitro
 		if (moveVertical >= 0.5 && moveSpeed > 40 && Camera.main.fieldOfView < 90)           
         {
@@ -101,7 +115,7 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		if (moveVertical < 0.5 && moveSpeed > 30)           
+		if (moveVertical < 0.5 && moveSpeed > 40)           
 		{
 			StartCoroutine(Decelerate());
 		}
@@ -208,7 +222,7 @@ public class PlayerController : MonoBehaviour
 	
 	IEnumerator Decelerate()
 	{
-		moveSpeed -= 0.15f;
+		moveSpeed -= 0.35f;
 		yield return new WaitForSeconds (4f);
 	}
 

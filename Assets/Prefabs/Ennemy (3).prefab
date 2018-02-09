@@ -53,14 +53,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1910773902098110}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 280.72, y: 4.7235, z: 155.78}
+  m_LocalRotation: {x: -0, y: 0.5693862, z: -0, w: 0.82207024}
+  m_LocalPosition: {x: 286.51672, y: -414.23505, z: -263.07455}
   m_LocalScale: {x: 0.89546937, y: 0.41417164, z: 0.83687013}
   m_Children:
   - {fileID: 4952735186575608}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 69.415, z: 0}
 --- !u!4 &4952735186575608
 Transform:
   m_ObjectHideFlags: 1
@@ -148,11 +148,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01dea8dc9d7ff9d4f848fb630665e4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 15
+  lookRadius: 35
   boat: {fileID: 0}
+  explosionPrefab: {fileID: 1979613153918454, guid: de3eab4cb0d969740b631630ae14b200,
+    type: 2}
   target: {fileID: 0}
   agent: {fileID: 195580317806317820}
   lifeBar: {fileID: 0}
+  path:
+  - {fileID: 0}
+  - {fileID: 0}
+  speed: 10
+  reachDist: 7
+  currentPoint: 0
   attach: 0
   life: 3
   playerDead: 0
@@ -165,11 +173,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 15
-  m_Acceleration: 8
+  m_Speed: 400
+  m_Acceleration: 13
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 4.5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

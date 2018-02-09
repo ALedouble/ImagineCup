@@ -10,6 +10,7 @@ public class AiConvoi : MonoBehaviour {
 	[SerializeField] Transform player;
 	int multplier = 1;
 	float range = 70;
+	public GameObject explosionPrefab;
 	public int lifeConvoi = 10;
 	public CannonBall ballScript;
 	public GameObject destroyPrefab;
@@ -39,7 +40,7 @@ public class AiConvoi : MonoBehaviour {
 //		print (ballScript.shoot);
 		Vector3 runto = transform.position + ((transform.position - player.position) * multplier);
 		float distance = Vector3.Distance (transform.position, player.position);
-		print (distance);
+		
 		if (distance < range) {
 			agent.SetDestination (runto);
 		}
@@ -50,7 +51,6 @@ public class AiConvoi : MonoBehaviour {
 			distanceSound = true;
 			audio.mute = false;
 			mainTheme.mute = false;
-			print ("oui");
 		}
 		
 		if (distance > 60)
@@ -67,7 +67,7 @@ public class AiConvoi : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.name == "CannonBall(Clone)") 
 		{
-			lifeConvoi -= 1;
+			lifeConvoi -= 2;
 		}
 	}
 		

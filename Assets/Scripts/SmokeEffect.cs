@@ -34,5 +34,13 @@ public class SmokeEffect : MonoBehaviour {
 			particleInstance.transform.parent = transform;
 			numberParticle += 1;
 		}
+		
+		if (moveVertical < 0){
+			particlePrefab.SetActive(false);
+		}
+		else
+		{
+			particlePrefab.SetActive(true);
+		}
     }
 }

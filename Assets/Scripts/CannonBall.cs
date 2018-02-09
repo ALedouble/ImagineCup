@@ -36,7 +36,7 @@ public class CannonBall : MonoBehaviour {
 		timer -= Time.deltaTime; 
 		
 		if (timer < 0){
-			rb.AddForce( -transform.up * 2000f);
+			rb.AddForce( -transform.up * 5000f);
 			rb.useGravity = true;
 		}
 		else
@@ -52,7 +52,7 @@ public class CannonBall : MonoBehaviour {
 		}
 		else
 		{
-			rb.AddForce( -transform.up * 200f);
+			rb.AddForce( -transform.up * 500f);
 			rb.constraints = RigidbodyConstraints.None;
 		}
 	}
